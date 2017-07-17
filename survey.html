@@ -168,7 +168,7 @@
       		<!--you-->
 		  <div class="col-sm-6 col-md-4">
 		    <div class="thumbnail">
-		      <img  class= "img" id="yourImg">
+		      <img  class="img" id="yourImg">
 		      <div class="caption">
 		        <h3 id="yourName"></h3>
 		      </div>
@@ -177,7 +177,6 @@
 		  <!--middle section-->
 		  <div class="col-sm-6 col-md-4" id="middle">
 		  	<h2 id="comment"></h2>
-		  	<button id="moreMatchesBtn" type="button" class="btn btn-primary">more matches</button>
 		  </div>
 		  <!--your match-->     		
 		  <div class="col-sm-6 col-md-4">
@@ -194,15 +193,15 @@
 </div>
 <style type="text/css">
 .img {
-	height:400px;
-	width:400px;
+	max-height:300px;
+	max-width:300px;
 }
 .caption,
 #middle {
 	text-align: center;
 }
 .thumbnail {
-	height:300px;
+	height:400px;
 }
 </style>
 </body>
@@ -214,13 +213,11 @@ var Profile = function(name,photoURL,scores){
 	this.scores = scores
 };
 $("#submit").on("click", function(){
-	matchUserWithFriend("toggle");
-});
-$("#moreMatchesBtn").on("click", function(){
 	matchUserWithFriend();
-})
+});
+
 //validate form and create user profile
-function matchUserWithFriend(e){
+function matchUserWithFriend(){
 	var name = $("#name").val().trim();
 	var photoURL = $("#photo").val().trim();
 	var question = $(".chosen-select").val();
@@ -372,9 +369,7 @@ function matchUserWithFriend(e){
 			})
 		
 		//trigger modal
-		if(e === "toggle"){
-			$(".modal").modal("toggle");
-		}	
+		$(".modal").modal("toggle");
 	}else{
 		//if the client does not enter values for all fields
 		alert("please enter all form fields for best results..")
