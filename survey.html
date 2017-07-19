@@ -218,16 +218,26 @@ $("#submit").on("click", function(){
 
 //validate form and create user profile
 function matchUserWithFriend(){
+	//set name to be used in profile constructor & form validation
 	var name = $("#name").val().trim();
+	//set photoURL to be used in profile constructor & form validation
 	var photoURL = $("#photo").val().trim();
+	//set question to be used for form validation
 	var question = $(".chosen-select").val();
+	//set scores to hold answers for profile constructor
 	var scores = [];
+	//loop through answers from to get user scores as an array
 	for(i=0;i<10;i++){
+		//set num for identifying questions
 		var num = i + 1;
+		//set answer to value question as num increments
 		var answer = $("#q"+ num).val();
+		//turn answer into an integer
 		answer = parseInt(answer);
+		//push answer to scores array
 		scores.push(answer);
 	};
+
 	function validate(){
 		valid = true;
 		invalid = false;
@@ -243,10 +253,10 @@ function matchUserWithFriend(){
 		}
 		return valid;
 	}
-
-	var validated = validate();
-
-	if (validated){
+	//set validation function as a var
+	var validation = validate();
+	//if validation returns as valid
+	if (validation === valid){
 		
 		//create user profile
 		var userProfile = new Profile(name, photoURL, scores);
@@ -255,10 +265,12 @@ function matchUserWithFriend(){
 		$("#yourName").html(userProfile.name);
 		//	send user profile to server to be processed and sent to api/friends
 		$.post("/api/new",userProfile,function(){
+			console.log("hello")
 		});
 
 		//get all profiles for user matching
 		$.get("/api/friends", function(res){
+			console.log("hello")
 			//set array to hold candidates to avoid the user matching him himself/herself
 			var candidates = [];
 			//set total user score var to compare user and db scores
@@ -303,6 +315,7 @@ function matchUserWithFriend(){
 				
 				function closest(num,arr){
 					//set curr to first number in array
+					//curr is current closest number
 	                var curr = arr[0];
 	                //set diff to absolute val of num - curr
 	                var diff = Math.abs (num - curr);
@@ -318,7 +331,7 @@ function matchUserWithFriend(){
 	                        curr = arr[l];
 	                    };
 	                };
-	                // //return value of closest number
+	                //return value of closest number
 	                return curr;
 	            };
 
