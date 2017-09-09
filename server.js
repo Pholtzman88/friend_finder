@@ -2,8 +2,12 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
-
-//set up express app
+var Nexmo = require("nexmo");
+var nexmo = new Nexmo({
+	apiKey:"7b9e5c61",
+	apiSecret: "22081a8215dcfc86"
+});
+//set up express app"
 var app = express();
 var PORT = process.env.PORT || 3000;
 
@@ -43,3 +47,5 @@ app.post("/api/new",function(req,res){
 app.listen(PORT, function(){
 	console.log("app listening on port: "+PORT);
 });
+
+
